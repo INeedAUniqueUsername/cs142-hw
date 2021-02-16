@@ -94,17 +94,36 @@ void p2() {
 		cout << "c[10][20] = " << c[10][20] << endl;
 }
 
+void tiled(unsigned s) {
+	cilk_for(int i1 = 0; i1 < n; i1 += s)
+		cilk_for(int j1 = 0; j1 < n; j1 += s)
+			for (int k1 = 0; k1 < n; k1 += s)
+				cilk_for(int i = i1; i < i1 + s && i < n; i++)
+					cilk_for(int j = j1; j < j1 + s && j < n; j++)
+						for (int k = k1; k < k1 + s && k < n; k++)
+							c[i * n + j] += a[i * n + k] * b[k * n + j];
+}
 void p3() {
-	cilk_for (int i2 = 0; i2 < n / t; i2 += t)
-		cilk_for (int j2 = 0; j2 < n / t; j2 += t)
-			for (int k2 = 0; k2 < n / t; k2 += t)
-				cilk_for (int i1 = i2; i1 < i2 + t && i1 < n; i1 += s)
-					cilk_for (int j1 = j2; j1 < j2 + t && j1 < n; j1 += s)
-						for (int k1 = k2; k1 < k2 + t && k1 < n; k1 += s)
-							cilk_for (int i = i1; i < i1 + s && i < i2 + t && i < n; i++)
-								cilk_for (int j = j1; j < j1 + s && j < j2 + t && j < n; j++)
-									for (int k = k1; k1 < k1 + s && k < k2 + t && k < n; k++)
-										c[i * n + j] += a[i * n + k] * b[k * n + j]
+		INIT
+		TIME(tiled(4), "s=4")
+		INIT
+		TIME(tiled(8), "s=8")
+		INIT
+		TIME(tiled(16), "s=16")
+		INIT
+		TIME(tiled(32), "s=32")
+		INIT
+		TIME(tiled(64), "s=64")
+		INIT
+		TIME(tiled(128), "s=128")
+		INIT
+		TIME(tiled(256), "s=256")
+		INIT
+		TIME(tiled(512), "s=512")
+		INIT
+		TIME(tiled(1024), "s=1024")
+		INIT
+		TIME(tiled(2048), "s=2048")
 }
 int main() {
 	p3();
