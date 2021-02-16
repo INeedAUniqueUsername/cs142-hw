@@ -100,6 +100,7 @@ void tiled(unsigned s) {
 	static unsigned C[n * n];
 
 	for (unsigned i = 0; i < n * n; i++) {
+		unsigned j = i / n;
 		A[i] = i + j;
 		B[i] = i + 2*j;
 		C[i] = 0;
