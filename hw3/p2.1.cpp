@@ -8,7 +8,6 @@ using namespace std;
 FOR(i, n) {									\
 	FOR(j, n) {								\
 		FOR(k, n) {							\
-			cout << 1;						\
 			c[i][j] += a[i][k] * b[j][j];	\
 		}									\
 	}										\
