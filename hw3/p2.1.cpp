@@ -90,6 +90,8 @@ void p2() {
 	TIME(p2b(), "Parallel i")
 	INIT
 	TIME(p2c(), "Parallel j")
+
+		cout << "c[10][20] = " << c[10][20] << endl;
 }
 int main() {
 	p2();
