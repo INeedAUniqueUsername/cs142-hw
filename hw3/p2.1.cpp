@@ -4,10 +4,10 @@ using namespace std;
 
 #define FOR(VAR, COUNT) for(int VAR = 0; VAR < COUNT; ++VAR)
 
-#define MULTIPLY(i, j, k)					\
-FOR(i, n) {									\
-	FOR(j, n) {								\
-		FOR(k, n) {							\
+#define MULTIPLY(VAR1, VAR2, VAR3)			\
+FOR(VAR1, n) {								\
+	FOR(VAR2, n) {							\
+		FOR(VAR3, n) {						\
 			c[i][j] += a[i][k] * b[j][j];	\
 		}									\
 	}										\
@@ -18,6 +18,7 @@ FOR(i, n) {									\
 	FOR(j, n) {								\
 		a[i][j] = i + j;					\
 		b[i][j] = i + 2 * j;				\
+		c[i][j] = 0;						\
 	}										\
 }
 
@@ -36,22 +37,18 @@ int b[n][n];
 int c[n][n];
 
 int main() {
+
+	cout << "c[10][20] = " << c[10][20] << endl;
 	INIT
 		TIME(MULTIPLY(i, j, k), "ijk")
-		cout << "c[10][20] = " << c[10][20] << endl;
 	INIT
 	TIME(MULTIPLY(i, k, j), "ikj")
-		cout << "c[10][20] = " << c[10][20] << endl;
 	INIT
 	TIME(MULTIPLY(j, i, k), "jik")
-		cout << "c[10][20] = " << c[10][20] << endl;
 	INIT
 	TIME(MULTIPLY(j, k, i), "jki")
-		cout << "c[10][20] = " << c[10][20] << endl;
 	INIT
 	TIME(MULTIPLY(k, i, j), "kij")
-		cout << "c[10][20] = " << c[10][20] << endl;
 	INIT
 	TIME(MULTIPLY(k, j, i), "kji")
-		cout << "c[10][20] = " << c[10][20] << endl;
 }
