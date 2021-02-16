@@ -1,3 +1,3 @@
 git pull;
-g++ p2.1.cpp -fcilkplus -O2;
+g++ -fcilkplus p2.1.cpp -O2;
 ./a.out;
