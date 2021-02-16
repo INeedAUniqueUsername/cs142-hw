@@ -56,34 +56,40 @@ void p1() {
 		TIME(MULTIPLY(k, j, i), "kji")
 		cout << "c[10][20] = " << c[10][20] << endl;
 }
+void p2a() {
+	CILK_FOR(i, n) {
+		FOR(k, n) {
+			CILK_FOR(j, n) {
+				COMPUTE
+			}
+		}
+	}
+}
+void p2b() {
+	CILK_FOR(i, n) {
+		FOR(k, n) {
+			FOR(j, n) {
+				COMPUTE
+			}
+		}
+	}
+}
+void p2c() {
+	FOR(i, n) {
+		FOR(k, n) {
+			CILK_FOR(j, n) {
+				COMPUTE
+			}
+		}
+	}
+}
 void p2() {
 	INIT
-	TIME(
-		CILK_FOR(i, n) {
-			FOR(k, n) {
-				CILK_FOR(j, n) {
-					COMPUTE
-				}
-			}
-		}, "Parallel ij")
+	TIME(p2a(), "Parallel ij")
 	INIT
-	TIME(
-		CILK_FOR(i, n) {
-			FOR(k, n) {
-				FOR(j, n) {
-					COMPUTE
-				}
-			}
-		}, "Parallel i")
+	TIME(p2b(), "Parallel i")
 	INIT
-	TIME(
-		FOR(i, n) {
-			FOR(k, n) {
-				CILK_FOR(j, n) {
-					COMPUTE
-				}
-			}
-		}, "Parallel j")
+	TIME(p2c(), "Parallel j")
 }
 int main() {
 	p2();
