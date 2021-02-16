@@ -30,7 +30,7 @@ FOR(i, n) {									\
 #define TIME(CODE, NAME) {					\
 	timer t;								\
 	t.start();								\
-	CODE									\
+	CODE;									\
 	t.stop();								\
 	cout << NAME << " time: " << t.get_total() << endl; \
 }
