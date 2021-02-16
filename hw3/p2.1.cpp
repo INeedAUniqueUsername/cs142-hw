@@ -38,6 +38,7 @@ int c[n][n];
 int main() {
 	INIT
 		TIME(MULTIPLY(i, j, k), "ijk")
+		cout << c[10][20] << endl;
 	INIT
 	TIME(MULTIPLY(i, k, j), "ikj")
 	INIT
