@@ -1,2 +1,3 @@
+git pull;
 g++ p2.1.cpp -O2;
-./a.out
+./a.out;
