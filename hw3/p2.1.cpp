@@ -95,13 +95,23 @@ void p2() {
 }
 
 void tiled(unsigned s) {
+	static unsigned A[n * n];
+	static unsigned B[n * n];
+	static unsigned C[n * n];
+
+	for (unsigned i = 0; i < n * n; i++) {
+		A[i] = i + j;
+		B[i] = i + 2*j;
+		C[i] = 0;
+	}
+
 	cilk_for(int i1 = 0; i1 < n; i1 += s)
 		cilk_for(int j1 = 0; j1 < n; j1 += s)
 			for (int k1 = 0; k1 < n; k1 += s)
 				cilk_for(int i = i1; i < i1 + s && i < n; i++)
 					cilk_for(int j = j1; j < j1 + s && j < n; j++)
 						for (int k = k1; k < k1 + s && k < n; k++)
-							c[i * n + j] += a[i * n + k] * b[k * n + j];
+							C[i * n + j] += A[i * n + k] * B[k * n + j];
 }
 void p3() {
 		INIT
