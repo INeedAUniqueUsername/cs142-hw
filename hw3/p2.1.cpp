@@ -1,14 +1,19 @@
+#include <cilk/cilk.h>
+#include <cilk/cilk_api.h>
+
 #include<iostream>
 #include "get_time.h"
 using namespace std;
 
 #define FOR(VAR, COUNT) for(int VAR = 0; VAR < COUNT; ++VAR)
+#define CILK_FOR(VAR, COUNT) cilk_for(int VAR = 0; VAR < COUNT; ++VAR)
 
+#define COMPUTE c[i][j] += a[i][k] * b[k][j];
 #define MULTIPLY(VAR1, VAR2, VAR3)			\
 FOR(VAR1, n) {								\
 	FOR(VAR2, n) {							\
 		FOR(VAR3, n) {						\
-			c[i][j] += a[i][k] * b[k][j];	\
+			COMPUTE							\
 		}									\
 	}										\
 }
@@ -51,6 +56,35 @@ void p1() {
 		TIME(MULTIPLY(k, j, i), "kji")
 		cout << "c[10][20] = " << c[10][20] << endl;
 }
+void p2() {
+	INIT
+	TIME(
+		CILK_FOR(i, n) {
+			FOR(k, n) {
+				CILK_FOR(j, n) {
+					COMPUTE
+				}
+			}
+		}, "Parallel ij")
+	INIT
+	TIME(
+		CILK_FOR(i, n) {
+			FOR(k, n) {
+				FOR(j, n) {
+					COMPUTE
+				}
+			}
+		}, "Parallel i")
+	INIT
+	TIME(
+		FOR(i, n) {
+			FOR(k, n) {
+				CILK_FOR(j, n) {
+					COMPUTE
+				}
+			}
+		}, "Parallel j")
+}
 int main() {
-	p1();
+	p2();
 }
