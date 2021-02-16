@@ -8,7 +8,7 @@ using namespace std;
 FOR(VAR1, n) {								\
 	FOR(VAR2, n) {							\
 		FOR(VAR3, n) {						\
-			c[i][j] += a[i][k] * b[j][j];	\
+			c[i][j] += a[i][k] * b[k][j];	\
 		}									\
 	}										\
 }
@@ -36,19 +36,21 @@ int a[n][n];
 int b[n][n];
 int c[n][n];
 
-int main() {
-
+void p1() {
 	INIT
 		TIME(MULTIPLY(i, j, k), "ijk")
-	INIT
-	TIME(MULTIPLY(i, k, j), "ikj")
-	INIT
-	TIME(MULTIPLY(j, i, k), "jik")
-	INIT
-	TIME(MULTIPLY(j, k, i), "jki")
-	INIT
-	TIME(MULTIPLY(k, i, j), "kij")
-	INIT
-	TIME(MULTIPLY(k, j, i), "kji")
+		INIT
+		TIME(MULTIPLY(i, k, j), "ikj")
+		INIT
+		TIME(MULTIPLY(j, i, k), "jik")
+		INIT
+		TIME(MULTIPLY(j, k, i), "jki")
+		INIT
+		TIME(MULTIPLY(k, i, j), "kij")
+		INIT
+		TIME(MULTIPLY(k, j, i), "kji")
 		cout << "c[10][20] = " << c[10][20] << endl;
+}
+int main() {
+	p1();
 }
