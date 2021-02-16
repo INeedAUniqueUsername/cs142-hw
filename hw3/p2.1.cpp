@@ -21,12 +21,12 @@ FOR(i, n) {									\
 	}										\
 }
 
-#define TIME(CODE) {						\
+#define TIME(CODE, NAME) {					\
 	timer t;								\
 	t.start();								\
 	CODE									\
 	t.stop();								\
-	cout << "CODE time: " << t.get_total() << endl; \
+	cout << NAME << " time: " << t.get_total() << endl; \
 }
 
 
@@ -37,15 +37,15 @@ int c[n][n];
 
 int main() {
 	INIT
-		TIME(MULTIPLY(i, j, k))
+		TIME(MULTIPLY(i, j, k), "ijk")
 	INIT
-	TIME(MULTIPLY(i, k, j))
+	TIME(MULTIPLY(i, k, j), "ikj")
 	INIT
-	TIME(MULTIPLY(j, i, k))
+	TIME(MULTIPLY(j, i, k), "jik")
 	INIT
-	TIME(MULTIPLY(j, k, i))
+	TIME(MULTIPLY(j, k, i), "jki")
 	INIT
-	TIME(MULTIPLY(k, i, j))
+	TIME(MULTIPLY(k, i, j), "kij")
 	INIT
-	TIME(MULTIPLY(k, j, i))
+	TIME(MULTIPLY(k, j, i), "kji")
 }
