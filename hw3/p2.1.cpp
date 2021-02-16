@@ -38,7 +38,6 @@ int c[n][n];
 
 int main() {
 
-	cout << "c[10][20] = " << c[10][20] << endl;
 	INIT
 		TIME(MULTIPLY(i, j, k), "ijk")
 	INIT
@@ -51,4 +50,5 @@ int main() {
 	TIME(MULTIPLY(k, i, j), "kij")
 	INIT
 	TIME(MULTIPLY(k, j, i), "kji")
+		cout << "c[10][20] = " << c[10][20] << endl;
 }
