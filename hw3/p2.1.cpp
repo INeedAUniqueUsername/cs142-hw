@@ -30,17 +30,13 @@ FOR(i, n) {									\
 	cout << "CODE time: " << t.get_total() << endl; \
 }
 
+
+const unsigned n = 1024;
+int a[n][n];
+int b[n][n];
+int c[n][n];
+
 int main() {
-	cout << "a" << endl;
-
-	unsigned n = 1024;
-	int a[n][n];
-	int b[n][n];
-	cout << "a" << endl;
-	int c[n][n];
-	cout << "a" << endl;
-	FOR(aaaa, n) { cout << aaaa << endl; }
-
 	INIT
 		TIME(MULTIPLY(i, j, k))
 	INIT
